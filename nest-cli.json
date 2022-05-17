@@ -1,0 +1,39 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/rabbitmq-microservices/src",
+  "monorepo": true,
+  "root": "apps/rabbitmq-microservices",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/rabbitmq-microservices/tsconfig.app.json"
+  },
+  "projects": {
+    "rabbitmq-microservices": {
+      "type": "application",
+      "root": "apps/rabbitmq-microservices",
+      "entryFile": "main",
+      "sourceRoot": "apps/rabbitmq-microservices/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rabbitmq-microservices/tsconfig.app.json"
+      }
+    },
+    "central": {
+      "type": "application",
+      "root": "apps/central",
+      "entryFile": "main",
+      "sourceRoot": "apps/central/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/central/tsconfig.app.json"
+      }
+    },
+    "microservice": {
+      "type": "application",
+      "root": "apps/microservice",
+      "entryFile": "main",
+      "sourceRoot": "apps/microservice/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/microservice/tsconfig.app.json"
+      }
+    }
+  }
+}
