@@ -1,31 +1,12 @@
 import { Controller, Get, Inject } from "@nestjs/common";
-import {
-	ClientProxy,
-	ClientProxyFactory,
-	Transport,
-} from "@nestjs/microservices";
+import { ClientProxy } from "@nestjs/microservices";
 
 @Controller()
 export class CentralController {
-	private client: ClientProxy;
-
-	constructor() {
-		this.client = ClientProxyFactory.create({
-			transport: Transport.RMQ,
-			options: {
-				urls: [
-					`amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}`,
-				],
-				queue: process.env.RABBITMQ_QUEUE_NAME,
-				queueOptions: {
-					durable: false,
-				},
-			},
-		});
-	}
+	constructor(@Inject("MICRO_SERVICE") private client: ClientProxy) {}
 
 	@Get()
-	getHello(): any {
-		return this.client.emit<string, string>("process_message", "Michael");
+	async getHello(): Promise<any> {
+		return this.client.emit<string, string>("process_message", "message");
 	}
 }
